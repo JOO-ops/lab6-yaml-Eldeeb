@@ -22,7 +22,7 @@ jobs:
 
       - name: Run tests
         run: |
-          python3 -m unittest discover -s tests -p "*.py"
+          python3 test_calculator.py
 
   deploy:
     needs: test_cases
