@@ -1,37 +1,38 @@
-name: tests python 
+name: Tests Python
+
 on:
   push:
-      branches: 
-        - master
+    branches:
+      - master
   pull_request:
-      branches:
-        - master
+    branches:
+      - master
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: action/checkout@v2
-      - uses: actions/checkout@v2
-      - name: install dependencies
-        run: | 
-                sudo apt-get install -y python3 python3-pip
-                pip install -r requirements.txt
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        -name: run tests
+      - name: Install dependencies
         run: |
-                python3 -m unittest discover -s tests -p "*.py"
-    deploy:
-        needs: test_cases
-        runs-on: ubuntu-latest
-        steps:
-          - name: action/checkout@v2
-          - uses: actions/checkout@v2
-          - name: deploy application
-            run: |
-                  echo "Deploying application..."
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Run tests
+        run: |
+          python3 -m unittest discover -s tests -p "*.py"
 
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
 
-    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy application
+        run: echo "Deploying application..."
