@@ -1,0 +1,92 @@
+name : Testing calculator
+on:
+    push:
+        branches:
+          - master
+    pull_request:
+        branches:
+          - master
+jobs:
+    test_cases:
+    run-on: ubuntu-latest
+    steps:
+        - name: action/checkout@v2
+        - uses: actions/checkout@v2
+        - name: install dependencies
+          run: |
+                sudo apt-get install -y python3 python3-pip
+                pip install -r requirements.txt
+        - name: run tests
+          run: |
+                python3 -m unittest discover -s tests -p "*.py"
+    deploy:
+          needs: test_cases
+          runs-on: ubuntu-latest
+          steps:
+            - name: action/checkout@v2
+            - uses: actions/checkout@v2
+            - name: deploy application
+              run: |
+                    echo "Deploying application..."
+
+name : Testing calculator
+on:
+    push:
+        branches:
+          - master
+    pull_request:
+        branches:
+          - master
+jobs:
+    test_cases:
+    run-on: ubuntu-latest
+    steps:
+        - name: action/checkout@v2
+        - uses: actions/checkout@v2
+        - name: install dependencies
+          run: |
+                sudo apt-get install -y python3 python3-pip
+                pip install -r requirements.txt
+        - name: run tests
+          run: |
+                python3 -m unittest discover -s tests -p "*.py"
+    deploy2:
+          needs: deploy
+          runs-on: ubuntu-latest
+          steps:
+            - name: action/checkout@v2
+            - uses: actions/checkout@v2
+            - name: deploy application
+              run: |
+                    echo "Deploying application..."
+
+name : Testing calculator
+on:
+    push:
+        branches:
+          - master
+    pull_request:
+        branches:
+          - master
+jobs:
+    test_cases:
+    run-on: ubuntu-latest
+    steps:
+        - name: action/checkout@v2
+        - uses: actions/checkout@v2
+        - name: install dependencies
+          run: |
+                sudo apt-get install -y python3 python3-pip
+                pip install -r requirements.txt
+        - name: run tests
+          run: |
+                python3 -m unittest discover -s tests -p "*.py"
+    deploy3:
+          runs-on: ubuntu-latest
+          steps:
+            - name: action/checkout@v2
+            - uses: actions/checkout@v2
+            - name: deploy application
+              run: |
+                    echo "Deploying application..."
+
